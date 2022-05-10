@@ -50,19 +50,14 @@ export default function App() {
       case '/':
         setCurrentNumber((fistNumber / lastNumber).toString());
         return;
+      // case ' ':
+      //   console.log('Porcenttagem');
+      //   return;
     }
   }
 
   function inverseValue(value) {
-    console.log(value);
-    if (value > 0) {
-      value = value - value * 2;
-      console.log(value);
-    } else if (value < 0) {
-      value = value - value * 2;
-      console.log(value);
-    }
-    return value;
+    return value - value * 2;
   }
 
   function handleInput(buttonPressed) {
