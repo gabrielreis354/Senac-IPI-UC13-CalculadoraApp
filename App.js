@@ -13,13 +13,13 @@ export default function App() {
     8,
     9,
     'x',
-    6,
-    5,
     4,
+    5,
+    6,
     '-',
-    3,
-    2,
     1,
+    2,
+    3,
     '+',
     0,
     '.',
@@ -45,21 +45,33 @@ export default function App() {
         setCurrentNumber((fistNumber - lastNumber).toString());
         return;
       case 'x':
-        setCurrentNumber((fistNumber + lastNumber).toString());
+        setCurrentNumber((fistNumber * lastNumber).toString());
         return;
       case '/':
-        setCurrentNumber((fistNumber - lastNumber).toString());
+        setCurrentNumber((fistNumber / lastNumber).toString());
         return;
     }
+  }
+
+  function inverseValue(value) {
+    console.log(value);
+    if (value > 0) {
+      value = value - value * 2;
+      console.log(value);
+    } else if (value < 0) {
+      value = value - value * 2;
+      console.log(value);
+    }
+    return value;
   }
 
   function handleInput(buttonPressed) {
     console.log(buttonPressed); // Mostra no Console a tecla pressionada
     if (
-      (buttonPressed === '+') |
-      (buttonPressed === '-') |
-      (buttonPressed === 'x') |
-      (buttonPressed === '/')
+      buttonPressed === '+' ||
+      buttonPressed === '-' ||
+      buttonPressed === 'x' ||
+      buttonPressed === '/'
     ) {
       setCurrentNumber(currentNumber + ' ' + buttonPressed + ' ');
       return;
@@ -77,6 +89,7 @@ export default function App() {
         calculator();
         return;
       case '+/-':
+        setCurrentNumber(inverseValue(currentNumber));
         return;
     }
 
@@ -128,5 +141,39 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  results: {
+    flex: 2,
+    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  resultText: {
+    color: '#282F38',
+    fontSize: 32,
+    fontWeight: 'bold',
+    padding: 12,
+    textAlign: 'right',
+  },
+  historyText: {
+    color: '#7c7c7c',
+    fontSize: 20,
+    marginRight: 10,
+    alignSelf: 'flex-end',
+  },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  button: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 90,
+    minHeight: 90,
+    flex: 2,
+  },
+  textButton: {
+    color: '#7c7c7c',
+    fontSize: 20,
   },
 });
