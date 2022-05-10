@@ -13,13 +13,13 @@ export default function App() {
     8,
     9,
     'x',
-    6,
-    5,
     4,
+    5,
+    6,
     '-',
-    3,
-    2,
     1,
+    2,
+    3,
     '+',
     0,
     '.',
@@ -53,6 +53,18 @@ export default function App() {
     }
   }
 
+  function inverseValue(value) {
+    console.log(value);
+    if (value > 0) {
+      value = value - value * 2;
+      console.log(value);
+    } else if (value < 0) {
+      value = value - value * 2;
+      console.log(value);
+    }
+    return value;
+  }
+
   function handleInput(buttonPressed) {
     console.log(buttonPressed); // Mostra no Console a tecla pressionada
     if (
@@ -77,6 +89,7 @@ export default function App() {
         calculator();
         return;
       case '+/-':
+        setCurrentNumber(inverseValue(currentNumber));
         return;
     }
 
