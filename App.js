@@ -31,38 +31,41 @@ export default function App() {
   const [lastNumber, setLastNumber] = useState('');
 
   function calculator() {
-    const splitNumbers = currentNumber.split(' ');
-    const fistNumber = parseFloat(splitNumbers[0]);
-    const lastNumber = parseFloat(splitNumbers[2]);
-    const operator = splitNumbers[1];
+    let splitNumbers = currentNumber.split(' ');
 
-    // Faz ação referente tecla pressionada
-    switch (operator) {
-      case '+':
-        setCurrentNumber((fistNumber + lastNumber).toString());
-        return;
-      case '-':
-        setCurrentNumber((fistNumber - lastNumber).toString());
-        return;
-      case 'x':
-        setCurrentNumber((fistNumber * lastNumber).toString());
-        return;
-      case '/':
-        setCurrentNumber((fistNumber / lastNumber).toString());
-        return;
+    if (splitNumbers.length == 1) {
+      splitNumbers = currentNumber.split('%');
+      const fistNumber = parseFloat(splitNumbers[0]);
+      const lastNumber = parseFloat(splitNumbers[1]);
+
+      //Operação com porcentagem
+      setCurrentNumber(((lastNumber / 100) * fistNumber).toString());
+      return;
+    } else {
+      const fistNumber = parseFloat(splitNumbers[0]);
+      const lastNumber = parseFloat(splitNumbers[2]);
+      const operator = splitNumbers[1];
+
+      // Faz ação referente tecla pressionada
+      switch (operator) {
+        case '+':
+          setCurrentNumber((fistNumber + lastNumber).toString());
+          return;
+        case '-':
+          setCurrentNumber((fistNumber - lastNumber).toString());
+          return;
+        case 'x':
+          setCurrentNumber((fistNumber * lastNumber).toString());
+          return;
+        case '/':
+          setCurrentNumber((fistNumber / lastNumber).toString());
+          return;
+      }
     }
   }
 
   function inverseValue(value) {
-    console.log(value);
-    if (value > 0) {
-      value = value - value * 2;
-      console.log(value);
-    } else if (value < 0) {
-      value = value - value * 2;
-      console.log(value);
-    }
-    return value;
+    return value - value * 2;
   }
 
   function handleInput(buttonPressed) {
@@ -78,7 +81,7 @@ export default function App() {
     }
     switch (buttonPressed) {
       case 'DEL':
-        setCurrentNumber(currentNumber.substring(0, currentNumber.length - 2));
+        setCurrentNumber(currentNumber.substring(0, currentNumber.length - 1));
         return;
       case 'LIMPAR': // Limpa todo o conteúdo
         setLastNumber('');
